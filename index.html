@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    /* Custom colors based on the theme */
+    .bg-primary {
+      background-color: #044ea0;
+    }
+
+    .text-primary {
+      color: #044ea0;
+    }
+
+    .bg-accent {
+      background-color: #fab814;
+    }
+
+    .text-accent {
+      color: #fab814;
+    }
+
+    /* Sidebar transition */
+    .sidebar {
+      transition: width 0.3s;
+    }
+
+    .sidebar-expanded {
+      width: 16rem; /* 256px */
+    }
+
+    .sidebar-collapsed {
+      width: 4rem; /* 64px */
+    }
+
+    /* Sidebar icon styling */
+    .sidebar-icon {
+      min-width: 2rem;
+    }
+
+    /* Hide text when sidebar is collapsed */
+    .sidebar-collapsed .sidebar-text {
+      display: none;
+    }
+
+    /* Tooltip for collapsed sidebar */
+    .sidebar-collapsed .sidebar-link:hover::after {
+      content: attr(data-title); /* Show the title when hovering */
+      position: absolute;
+      left: 4.5rem;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      white-space: nowrap;
+      z-index: 50;
+      pointer-events: none;
+      font-size: 0.875rem;
+    }
+
+    /* Sidebar link hover effect */
+    .sidebar-link:hover {
+      background-color: #fab814;
+      position: relative;
+    }
+
+    /* Content transition */
+    .content {
+      transition: margin-left 0.3s;
+    }
+
+    .content-expanded {
+      margin-left: 16rem; /* 256px */
+    }
+
+    .content-collapsed {
+      margin-left: 4rem; /* 64px */
+    }
+	/* Chart Placeholder Styles */
+#sales-chart {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Topbar -->
+  <header class="bg-primary text-white shadow-md p-4 flex justify-between items-center fixed top-0 left-0 right-0 z-10">
+    <div class="flex items-center">
+      <!-- Sidebar Toggle Button -->
+      <button id="sidebarToggle" class="text-white focus:outline-none">
+        <span class="material-icons">menu</span>
+      </button>
+      <h1 class="ml-4 text-xl font-bold">Dashboard</h1>
+    </div>
+
+    <!-- Profile Dropdown -->
+    <div class="relative">
+      <button id="profileButton" class="bg-accent text-white px-4 py-2 rounded-md focus:outline-none">
+        Profile
+      </button>
+
+      <!-- Dropdown Menu -->
+      <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-20">
+        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Settings</a>
+        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Log Out</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar sidebar-collapsed fixed top-0 left-0 h-full bg-primary text-white p-4 pt-16">
+    <nav>
+      <ul>
+        <li class="mb-4 mt-5">
+          <a href="#" class="sidebar-link flex items-center text-white hover:bg-accent hover:bg-opacity-20 p-2 rounded-md" data-title="Dashboard">
+            <span class="sidebar-icon">
+              <span class="material-icons">dashboard</span>
+            </span>
+            <span class="ml-2 sidebar-text">Dashboard</span>
+          </a>
+        </li>
+        <li class="mb-4">
+          <a href="#" class="sidebar-link flex items-center text-white hover:bg-accent hover:bg-opacity-20 p-2 rounded-md" data-title="Accounts">
+            <span class="sidebar-icon">
+              <span class="material-icons">account_circle</span>
+            </span>
+            <span class="ml-2 sidebar-text">Accounts</span>
+          </a>
+        </li>
+        <li class="mb-4">
+          <a href="#" class="sidebar-link flex items-center text-white hover:bg-accent hover:bg-opacity-20 p-2 rounded-md" data-title="Inventory">
+            <span class="sidebar-icon">
+              <span class="material-icons">inventory</span>
+            </span>
+            <span class="ml-2 sidebar-text">Inventory</span>
+          </a>
+        </li>
+        <li class="mb-4">
+          <a href="#" class="sidebar-link flex items-center text-white hover:bg-accent hover:bg-opacity-20 p-2 rounded-md" data-title="Analytics">
+            <span class="sidebar-icon">
+              <span class="material-icons">analytics</span>
+            </span>
+            <span class="ml-2 sidebar-text">Analytics</span>
+          </a>
+        </li>
+        <li class="mb-4">
+          <a href="#" class="sidebar-link flex items-center text-white hover:bg-accent hover:bg-opacity-20 p-2 rounded-md" data-title="Settings">
+            <span class="sidebar-icon">
+              <span class="material-icons">settings</span>
+            </span>
+            <span class="ml-2 sidebar-text">Settings</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content Area -->
+<main id="main-content" class="content content-collapsed pt-20 p-6 bg-gray-100 <!-- Main Content Area -->
+<main id="main-content" class="content content-collapsed pt-20 p-6 bg-gray-100 min-h-screen">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+    <!-- Account Summary Card -->
+    <div class="bg-white p-4 rounded-lg shadow-lg">
+      <h3 class="text-primary font-bold">Total Accounts</h3>
+      <p class="text-4xl font-extrabold">1,234</p>
+    </div>
+
+    <!-- Inventory Summary Card -->
+    <div class="bg-white p-4 rounded-lg shadow-lg">
+      <h3 class="text-primary font-bold">Total Inventory</h3>
+      <p class="text-4xl font-extrabold">567</p>
+    </div>
+
+    <!-- Analytics Summary Card -->
+    <div class="bg-white p-4 rounded-lg shadow-lg">
+      <h3 class="text-primary font-bold">Total Sales</h3>
+      <p class="text-4xl font-extrabold">$8,567</p>
+    </div>
+  </div>
+
+  <!-- Inventory Table -->
+  <div class="bg-white rounded-lg shadow-lg p-4 mb-4">
+    <h3 class="text-primary font-bold mb-2">Inventory Report</h3>
+    <table class="min-w-full border border-gray-200">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="border border-gray-300 p-2 text-left">Item</th>
+          <th class="border border-gray-300 p-2 text-left">Quantity</th>
+          <th class="border border-gray-300 p-2 text-left">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-300 p-2">Item A</td>
+          <td class="border border-gray-300 p-2">100</td>
+          <td class="border border-gray-300 p-2">$10.00</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-300 p-2">Item B</td>
+          <td class="border border-gray-300 p-2">200</td>
+          <td class="border border-gray-300 p-2">$15.00</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-300 p-2">Item C</td>
+          <td class="border border-gray-300 p-2">150</td>
+          <td class="border border-gray-300 p-2">$12.50</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Sales Chart -->
+  <div class="bg-white rounded-lg shadow-lg p-4 mb-4">
+    <h3 class="text-primary font-bold mb-2">Sales Overview</h3>
+    <div id="sales-chart" class="h-64">
+      <!-- Placeholder for chart -->
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Recent Transactions -->
+  <div class="bg-white rounded-lg shadow-lg p-4">
+    <h3 class="text-primary font-bold mb-2">Recent Transactions</h3>
+    <table class="min-w-full border border-gray-200">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="border border-gray-300 p-2 text-left">Date</th>
+          <th class="border border-gray-300 p-2 text-left">Transaction ID</th>
+          <th class="border border-gray-300 p-2 text-left">Amount</th>
+          <th class="border border-gray-300 p-2 text-left">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-300 p-2">10/12/2024</td>
+          <td class="border border-gray-300 p-2">#001</td>
+          <td class="border border-gray-300 p-2">$150.00</td>
+          <td class="border border-gray-300 p-2 text-green-500">Completed</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-300 p-2">10/11/2024</td>
+          <td class="border border-gray-300 p-2">#002</td>
+          <td class="border border-gray-300 p-2">$250.00</td>
+          <td class="border border-gray-300 p-2 text-red-500">Failed</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-300 p-2">10/10/2024</td>
+          <td class="border border-gray-300 p-2">#003</td>
+          <td class="border border-gray-300 p-2">$75.00</td>
+          <td class="border border-gray-300 p-2 text-green-500">Completed</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+
+
+  <!-- JavaScript for sidebar toggling and dropdown -->
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('main-content');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const profileButton = document.getElementById('profileButton');
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    sidebarToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('sidebar-expanded');
+      sidebar.classList.toggle('sidebar-collapsed');
+
+      mainContent.classList.toggle('content-expanded');
+      mainContent.classList.toggle('content-collapsed');
+    });
+
+    profileButton.addEventListener('click', () => {
+      profileDropdown.classList.toggle('hidden');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!profileButton.contains(e.target) && !profileDropdown.contains(e.target)) {
+        profileDropdown.classList.add('hidden');
+      }
+    });
+  </script>
+  <script>
+  const ctx = document.getElementById('myChart').getContext('2d');
+  const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [{
+        label: 'Sales ($)',
+        data: [1200, 1900, 3000, 500, 2000, 2500, 3100],
+        backgroundColor: [
+          'rgba(4, 78, 160, 0.6)',
+          'rgba(250, 184, 20, 0.6)',
+          'rgba(4, 78, 160, 0.6)',
+          'rgba(250, 184, 20, 0.6)',
+          'rgba(4, 78, 160, 0.6)',
+          'rgba(250, 184, 20, 0.6)',
+          'rgba(4, 78, 160, 0.6)',
+        ],
+        borderColor: [
+          'rgba(4, 78, 160, 1)',
+          'rgba(250, 184, 20, 1)',
+          'rgba(4, 78, 160, 1)',
+          'rgba(250, 184, 20, 1)',
+          'rgba(4, 78, 160, 1)',
+          'rgba(250, 184, 20, 1)',
+          'rgba(4, 78, 160, 1)',
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
