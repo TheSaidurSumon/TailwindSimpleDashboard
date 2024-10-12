@@ -22,22 +22,6 @@ A simple and responsive admin dashboard template built with Tailwind CSS. This d
 - User profile section in the top bar.
 
  ![Dashboard Screenshot](images/screenshot2.PNG)
-##Usage
-Open index.html in your browser to view the dashboard. You can modify the content and styles as needed to suit your project's requirements.
-
-Features in Action
-Click the hamburger menu icon to toggle the sidebar.
-Hover over sidebar items to view tooltips with titles.
-Use the user profile button to display additional settings (if implemented).
-Technologies Used
-HTML: Markup for the dashboard layout.
-CSS: Styling with Tailwind CSS.
-JavaScript: For interactive elements like the sidebar toggle.
-Contributing
-Contributions are welcome! Please feel free to submit a pull request or open an issue for any suggestions or enhancements.
-
-##License
-This project is licensed under the MIT License. See the LICENSE file for more information.
 
 ## Installation
 
