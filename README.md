@@ -22,17 +22,6 @@ A simple and responsive admin dashboard template built with Tailwind CSS. This d
 - User profile section in the top bar.
 
  ![Dashboard Screenshot](images/screenshot2.PNG)
-
-
-## Installation
-
-To get started with this project, clone the repository and install the required packages:
-
-```bash
-git clone https://github.com/thesaidursumon/TailwindSimpleDashboard.git
-cd TailwindSimpleDashboard
-
-
 ##Usage
 Open index.html in your browser to view the dashboard. You can modify the content and styles as needed to suit your project's requirements.
 
@@ -49,3 +38,14 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 
 ##License
 This project is licensed under the MIT License. See the LICENSE file for more information.
+
+## Installation
+
+To get started with this project, clone the repository and install the required packages:
+
+```bash
+git clone https://github.com/thesaidursumon/TailwindSimpleDashboard.git
+cd TailwindSimpleDashboard
+
+
+
