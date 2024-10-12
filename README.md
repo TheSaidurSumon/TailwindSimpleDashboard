@@ -1,6 +1,6 @@
 # Tailwind CSS Admin Dashboard
 
-![Dashboard Screenshot](./screenshot.png) <!-- Replace with your screenshot path -->
+![Dashboard Screenshot](images/screenshot.png) <!-- Replace with your screenshot path -->
 
 A simple and responsive admin dashboard template built with Tailwind CSS. This dashboard features a collapsible sidebar, a top navigation bar, and various cards for displaying data such as total accounts, inventory, and sales. 
 
