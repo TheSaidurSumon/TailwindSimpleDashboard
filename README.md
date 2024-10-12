@@ -21,6 +21,8 @@ A simple and responsive admin dashboard template built with Tailwind CSS. This d
 - Easy to customize with Tailwind CSS utility classes.
 - User profile section in the top bar.
 
+ ![Dashboard Screenshot](images/screenshot2.PNG)
+
 ## Installation
 
 To get started with this project, clone the repository and install the required packages:
